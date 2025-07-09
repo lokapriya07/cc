@@ -120,3 +120,11 @@ Edit
 SELECT * FROM Products 
 WHERE Price < 50 AND StockCount > 0
 ✅ This retrieves all affordable products that are still in stock.
+------------------------------------------------------------------------------
+Booking Confirmed!  
+{DepartureCity} → {Destination} | {TravelDate} (Return: {ReturnDate})  
+{Passengers} Passengers | {Class} Class  
+Meals: 2 Veg, 3 Non-Veg | Seats: 15A,15B (Window - Fee Waived)  
+Total: ₹87,500 (20% group discount applied)  
+Frequent Flyer: GA-7X9B2P (Earned: 875 points)
+
