@@ -1,0 +1,122 @@
+Hello
+EBS CMDS
+->sudo su
+-> fdisk -l
+->mkdir /cc
+->mkfs /dev/xvdf
+->mount /dev/xvdf /cc
+->cd /cc
+->nano a.txt
+add text
+->cat a.txt
+now detach the vol and attach new instance ti that vol /dev/sdf
+now 
+->sudo su
+->fdisk -l
+->mkdir /cc
+->mount /dev/xvdf /cc
+->cd /cc
+ls 
+------------------------------------------------------------
+EFS
+->sudo yum -y install amazon-efs-utils
+->sudo mkdir /cc
+->sudo chown -R ec2-user:ec2-user /cc
+->add mount cmd
+->again change own
+->touch roll.txt
+->echo "txect">rool.txt
+->ls 
+->same for another instance
+---------------------------------------------------------------------
+for pem file copy using ubuntu in powershell
+scp .\pem.pem ubuntu@<publicip>
+scp -i .\.pem .\.pem ubuntu@publicip:/home/ubuntu
+--------------------------------------------------------------------------
+dynamodb
+task-2:{
+  "ProductID": { "S": "P1001" },
+  "Name": { "S": "Samsung Galaxy A15" },
+  "Category": { "S": "Electronics" },
+  "Price": { "N": "179" },
+  "StockCount": { "N": "45" }
+}
+task -3b) Using JSON File (Laptop)
+Create a file named laptop.json with:
+
+json
+Copy
+Edit
+{
+  "ProductID": { "S": "P1002" },
+  "Name": { "S": "HP Pavilion x360" },
+  "Category": { "S": "Electronics" },
+  "Price": { "N": "799" },
+  "StockCount": { "N": "20" }
+}
+Upload using CLI:
+
+bash
+Copy
+Edit
+aws dynamodb put-item \
+  --table-name Products \
+  --item file://laptop.json
+task-4
+c) Using PartiQL Editor (Headphones)
+Go to your Products table → Click PartiQL editor
+
+Paste:
+
+sql
+Copy
+Edit
+INSERT INTO Products VALUE {
+  'ProductID': 'P1003',
+  'Name': 'Boat Rockerz 400',
+  'Category': 'Electronics',
+  'Price': 29,
+  'StockCount': 120
+}
+✅ Task 3: Scan to Retrieve All Electronics Products
+Go to your Products table → PartiQL editor
+
+Run this PartiQL:
+
+sql
+Copy
+Edit
+SELECT * FROM Products WHERE Category = 'Electronics'
+🔹 This acts like a Scan with a filter condition.
+
+✅ You will see all products in the Electronics category.
+
+✅ Task 4: Query for ProductID = 'P1005'
+🔸 You can only query by the partition key, so use this if P1005 exists:
+
+a) Using Query Tab:
+Go to your table → Explore Table Items
+
+Click Query tab
+
+Attribute name: ProductID
+Operator: =
+Value: P1005
+
+Click Run
+
+b) Or using PartiQL:
+sql
+Copy
+Edit
+SELECT * FROM Products WHERE ProductID = 'P1005'
+✅ You’ll get the matching item (if it exists).
+
+✅ Task 5: PartiQL to Find Products Under $50 with Stock Available
+📌 PartiQL Query:
+sql
+Copy
+Edit
+SELECT * FROM Products 
+WHERE Price < 50 AND StockCount > 0
+✅ This retrieves all affordable products that are still in stock.
